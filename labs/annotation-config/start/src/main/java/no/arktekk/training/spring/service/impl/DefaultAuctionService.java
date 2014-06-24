@@ -4,19 +4,21 @@ import no.arktekk.training.spring.domain.Auction;
 import no.arktekk.training.spring.repository.AuctionRepository;
 import no.arktekk.training.spring.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
+@Service
 public class DefaultAuctionService implements AuctionService {
-    private final AuctionRepository auctionRepository;
-
     @Autowired
-    public DefaultAuctionService(AuctionRepository auctionRepository) {
-        this.auctionRepository = auctionRepository;
-    }
+    private final AuctionRepository auctionRepository = null;
+
+
+    public DefaultAuctionService() {}
 
 
     public List<Auction> allRunningAuctions() {
