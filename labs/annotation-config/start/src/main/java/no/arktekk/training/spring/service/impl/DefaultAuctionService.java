@@ -5,14 +5,14 @@ import no.arktekk.training.spring.repository.AuctionRepository;
 import no.arktekk.training.spring.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
-@Service
+
+@Component
 public class DefaultAuctionService implements AuctionService {
     @Autowired
     private final AuctionRepository auctionRepository = null;

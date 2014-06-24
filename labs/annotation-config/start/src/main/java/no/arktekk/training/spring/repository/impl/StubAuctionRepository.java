@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
-
 @Repository
 public class StubAuctionRepository implements AuctionRepository {
 
