@@ -1,10 +1,12 @@
 package no.arktekk.training.spring;
 
+import no.arktekk.training.spring.config.AuctionContainer;
 import no.arktekk.training.spring.domain.Auction;
 import no.arktekk.training.spring.repository.AuctionRepository;
 import no.arktekk.training.spring.service.AuctionService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -68,7 +70,7 @@ public class DependencyInjectionTest {
      * Use the class no.arktekk.training.spring.config.AuctionContainer to build the container
      */
     private ApplicationContext createSpringContainer() {
-        return null;
+        return new AnnotationConfigApplicationContext(AuctionContainer.class);
     }
 
 

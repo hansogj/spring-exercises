@@ -10,7 +10,17 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
+@Configuration
 public class AuctionContainer {
 
+    @Bean
+    public AuctionRepository auctionRepository () {
+        return new StubAuctionRepository();
+    }
+
+    @Bean
+    public AuctionService auctionService () {
+        return new DefaultAuctionService(auctionRepository());
+    }
 
 }
