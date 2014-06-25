@@ -69,6 +69,7 @@ public class DependencyInjectionTest {
     /**
      * Use the class no.arktekk.training.spring.config.AuctionContainer to build the container
      */
+
     private ApplicationContext createSpringContainer() {
         return new AnnotationConfigApplicationContext(AuctionContainer.class);
     }
