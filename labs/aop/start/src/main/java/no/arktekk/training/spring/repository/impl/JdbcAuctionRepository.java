@@ -36,6 +36,7 @@ public class JdbcAuctionRepository implements AuctionRepository {
     }
 
     public Auction findById(Double auctionId) {
+        System.out.println("Looking up auctionId: "+ auctionId);
         return template.queryForObject("select * from Auctions where id = ?", new AuctionMapper(), auctionId);
     }
 }
