@@ -2,6 +2,7 @@ package no.arktekk.training.spring.repository.impl;
 
 import no.arktekk.training.spring.domain.Auction;
 import no.arktekk.training.spring.repository.AuctionRepository;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 import java.util.List;
+
+import static no.arktekk.training.spring.util.DatabaseUtils.no_NO;
+import static no.arktekk.training.spring.util.DatabaseUtils.timeStampFormatter;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,12 +32,13 @@ public class SpringJdbcAuctionRepository implements AuctionRepository{
 
     @Override
     public List<Auction> listAllRunningAuctions() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        String sql = "select * from Auctions where ? between starts and expires";
+        return jdbcTemplate.query(sql, new AuctionRowMapper(),
+                timeStampFormatter.print(new DateTime().toDate(), no_NO));
     }
 
     @Override
     public Auction findById(Double auctionId) {
-
         String sql = "select * from Auctions where id = ?";
         List<Auction> auctions = jdbcTemplate.query(sql, new AuctionRowMapper(), auctionId);
         if(! auctions.isEmpty()) {
