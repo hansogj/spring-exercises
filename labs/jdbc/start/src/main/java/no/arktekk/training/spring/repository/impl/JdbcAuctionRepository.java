@@ -22,7 +22,7 @@ import static no.arktekk.training.spring.util.DatabaseUtils.timeStampFormatter;
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
-@Repository
+//@Repository
 public class JdbcAuctionRepository implements AuctionRepository {
     private final DataSource dataSource;
 

@@ -46,7 +46,7 @@ public class AopTest {
         repository.findById(1D);
         assertEquals(new Double(1D), findByIdMonitor.hits());
 
-        repository.findById(2D);
+        System.out.println(repository.findById(2D).description());
         assertEquals(new Double(2D), findByIdMonitor.hits());
     }
 

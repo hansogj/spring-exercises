@@ -4,5 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+<!--
+    <bean name="springAuctionRepository" class="no.arktekk.training.spring.repository.impl.SpringJdbcAuctionRepository">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+-->
+
     <context:component-scan base-package="no.arktekk.training.spring"/>
 </beans>
