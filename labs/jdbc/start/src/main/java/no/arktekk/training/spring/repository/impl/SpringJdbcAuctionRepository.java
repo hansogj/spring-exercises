@@ -4,12 +4,18 @@ import no.arktekk.training.spring.domain.Auction;
 import no.arktekk.training.spring.repository.AuctionRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static no.arktekk.training.spring.util.DatabaseUtils.no_NO;
 import static no.arktekk.training.spring.util.DatabaseUtils.timeStampFormatter;
@@ -22,6 +28,7 @@ import static no.arktekk.training.spring.util.DatabaseUtils.timeStampFormatter;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
+@Qualifier("fasion")
 public class SpringJdbcAuctionRepository implements AuctionRepository{
     private JdbcTemplate jdbcTemplate;
 
@@ -44,5 +51,12 @@ public class SpringJdbcAuctionRepository implements AuctionRepository{
         if(! auctions.isEmpty()) {
             return auctions.get(0);
         } else return null;
+    }
+
+    @Override
+    public List<Auction> getAuctions(Map parameters) {
+
+        String sql = "select * from Auctions where mimimumPrice > :mimimumPrice and description like :description";
+        return jdbcTemplate.query(sql, new AuctionRowMapper(), parameters);
     }
 }

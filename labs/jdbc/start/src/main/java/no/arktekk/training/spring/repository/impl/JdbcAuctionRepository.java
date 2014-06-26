@@ -4,6 +4,7 @@ import no.arktekk.training.spring.domain.Auction;
 import no.arktekk.training.spring.repository.AuctionRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static no.arktekk.training.spring.util.DatabaseUtils.no_NO;
 import static no.arktekk.training.spring.util.DatabaseUtils.timeStampFormatter;
@@ -22,7 +24,8 @@ import static no.arktekk.training.spring.util.DatabaseUtils.timeStampFormatter;
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
-//@Repository
+@Repository
+@Qualifier("oldFasion")
 public class JdbcAuctionRepository implements AuctionRepository {
     private final DataSource dataSource;
 
@@ -106,6 +109,11 @@ public class JdbcAuctionRepository implements AuctionRepository {
             }
         }
         return auction;
+    }
+
+    @Override
+    public List<Auction> getAuctions(Map parameters) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     private Auction mapAuction(ResultSet resultSet) throws SQLException {
