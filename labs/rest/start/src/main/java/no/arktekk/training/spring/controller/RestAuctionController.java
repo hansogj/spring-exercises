@@ -24,7 +24,7 @@ public class RestAuctionController {
 	
 	private final AuctionService auctionService;
 
-	@Autowired
+    @Autowired
 	private Jaxb2Marshaller jaxb2Marshaller;
 	
 	@Autowired
@@ -32,19 +32,34 @@ public class RestAuctionController {
 		this.auctionService = auctionService;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/auctions", method = RequestMethod.GET)
 	public ModelAndView listAuctions() {
-		return null;
+		ModelAndView mav = new ModelAndView("jaxbMarshallerView");
+        AuctionList auctionList = new AuctionList(auctionService.allRunningAuctions());
+        mav.addObject(auctionList);
+        return mav;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/auctions/{auctionId}", method = RequestMethod.GET)
 	public ModelAndView getAuction(@PathVariable String auctionId) {
-		return null;
+        ModelAndView mav = new ModelAndView("jaxbMarshallerView");
+        Auction auction = auctionService.findById(auctionId);
+        mav.addObject(auction);
+		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView createAuction(@RequestBody String auctionXml) {
-		return null;
+        ModelAndView mav = new ModelAndView("jaxbMarshallerView");
+        Source source = new StreamSource(new StringReader(auctionXml));
+        Auction auction = (Auction) jaxb2Marshaller.unmarshal(source);
+        auctionService.newAuction(auction);
+        mav.addObject(auction);
+		return mav;
 	}
+
+    public void setJaxb2Marshaller(Jaxb2Marshaller jaxb2Marshaller) {
+        this.jaxb2Marshaller = jaxb2Marshaller;
+    }
 
 }

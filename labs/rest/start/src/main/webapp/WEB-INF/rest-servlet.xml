@@ -8,5 +8,16 @@
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+    
+    <context:annotation-config />
+
+    <bean id="restController" class="no.arktekk.training.spring.controller.RestAuctionController">
+        <constructor-arg name="auctionService" ref="auctionServiceImpl" />
+        <!--<property name="jaxb2Marshaller" ref="jaxb2Marshaller" />-->
+    </bean>
+
+    <bean id="jaxbMarshallerView" class="org.springframework.web.servlet.view.xml.MarshallingView" >
+        <constructor-arg ref="jaxb2Marshaller" name="marshaller"/>
+    </bean>
 
 </beans>
