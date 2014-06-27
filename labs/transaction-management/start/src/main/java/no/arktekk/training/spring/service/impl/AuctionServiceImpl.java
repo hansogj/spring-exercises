@@ -5,6 +5,7 @@ import no.arktekk.training.spring.repository.AuctionRepository;
 import no.arktekk.training.spring.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
@@ -19,6 +20,7 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
     @Override
+    @Transactional
     public void newAuction(Auction auction) {
         auctionRepository.store(auction);
     }

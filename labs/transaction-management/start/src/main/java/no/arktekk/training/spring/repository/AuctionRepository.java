@@ -17,6 +17,6 @@ public interface AuctionRepository {
 
     Auction findById(Double auctionId);
 
-    @Transactional(readOnly = false, propagation = Propagation.MANDATORY)
+    @Transactional(readOnly = false)
     void store(Auction auction);
 }

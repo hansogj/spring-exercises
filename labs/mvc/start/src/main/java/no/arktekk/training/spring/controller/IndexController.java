@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.annotation.Retention;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import static no.arktekk.training.spring.form.Transformations.asAuctionForm;
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
+@Controller
 public class IndexController {
     private final AuctionService auctionService;
 
@@ -24,12 +26,14 @@ public class IndexController {
         this.auctionService = auctionService;
     }
 
+    @RequestMapping("/index.html")
     public @ModelAttribute("auctions") List<AuctionForm> auctionList() {
         List<AuctionForm> forms = new ArrayList<AuctionForm>();
 
+        for(Auction auction: auctionService.allRunningAuctions()) {
         // TIP: to get a auction object to become an auctionForm use the function defined here:
-        // no.arktekk.training.spring.form.Transformations.asAuctionForm.apply(auction)
-
+            forms.add(asAuctionForm.apply(auction));
+        }
         return forms;
 
     }

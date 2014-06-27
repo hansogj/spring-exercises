@@ -12,14 +12,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
- * @author <a href="mailto:marten@haglind.com">MŒrten Haglind</a>
+ * @author <a href="mailto:marten@haglind.com">Mrten Haglind</a>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
@@ -42,6 +44,8 @@ public class TransactionManagementTest {
 	 * order to get this test to run
 	 */
 	@Test
+    @Repeat(2)
+    @Transactional  //when applied to a test, @transactional rollback the test-db
 	public void step_1() throws Exception {
 
 		int auctionsBeforeTest = auctionCount();

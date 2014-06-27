@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static no.arktekk.training.spring.form.Transformations.asAuctionForm;
 
+
 /**
  * @author <a href="mailto:kaare.nilsen@arktekk.no">Kaare Nilsen</a>
  */
+@Controller
 public class AuctionController {
     private final AuctionService auctionService;
 
@@ -19,10 +21,11 @@ public class AuctionController {
     public AuctionController(AuctionService auctionService) {
         this.auctionService = auctionService;
     }
-
+    @RequestMapping("/auctions/{auctionId}.html")
     public String showDetails(@PathVariable Double auctionId, ModelMap model) {
         // TIP: to get a auction object to become an auctionForm use the function defined here:
         // no.arktekk.training.spring.form.Transformations.asAuctionForm.apply(auction)
+        model.put("auction", asAuctionForm.apply(auctionService.findById(auctionId)));
         return "auction/details";
     }
 }

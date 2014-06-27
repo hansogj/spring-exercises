@@ -6,5 +6,11 @@
 
     <context:component-scan base-package="no.arktekk.training.spring"/>
 
+    <tx:annotation-driven />
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
     <bean id="dataSource" class="no.arktekk.training.spring.config.TestDataSourceFactoryBean"/>
 </beans>
